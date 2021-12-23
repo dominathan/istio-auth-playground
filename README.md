@@ -1,3 +1,11 @@
+# Istio AuthN/AuthZ
+
+see ./samples/nathan-auth/ - For example if using auth0, apply in this order
+
+1. kubectl apply -f ./samples/nathan-auth/mtls-policy
+1. kubectl apply -f ./samples/nathan-auth/ratings-jwt-auth0-authn.yaml
+1. kubectl apply -f ./sample/nathan-auth/bookinfo-authz/ratings-auth0.yaml
+
 # Istio
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/istio/istio)](https://goreportcard.com/report/github.com/istio/istio)
