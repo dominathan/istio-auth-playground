@@ -1,0 +1,12 @@
+apiVersion: security.istio.io/v1beta1
+kind: RequestAuthentication
+metadata:
+  name: "ratings-page-jwt-keycloak-authn"
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: ratings
+  jwtRules:
+  - issuer: "http://localhost:8080/auth/realms/naynaytest"
+    jwksUri: "https://3e22-99-35-226-217.ngrok.io/auth/realms/naynaytest/protocol/openid-connect/certs" #have to use ngrok on separate cluster

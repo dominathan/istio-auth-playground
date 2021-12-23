@@ -1,0 +1,12 @@
+apiVersion: security.istio.io/v1beta1
+kind: RequestAuthentication
+metadata:
+  name: "ratings-page-jwt-auth0-authn"
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: ratings
+  jwtRules:
+  - issuer: "https://dev-i5c831tc.us.auth0.com/"
+    jwksUri: "https://dev-i5c831tc.us.auth0.com/.well-known/jwks.json"

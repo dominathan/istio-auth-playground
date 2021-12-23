@@ -1,0 +1,27 @@
+# Allow both the products reviews to get data (for the bookinfo page to work)
+# and for external users with verified tokens
+
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: "ratings-auth0-viewer"
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: ratings
+  action: ALLOW
+  rules:
+  - from:
+    - source:
+        principals: ["cluster.local/ns/default/sa/bookinfo-reviews"]
+    to:
+    - operation:
+        methods: ["GET"]
+  - from:
+    - source:
+       requestPrincipals: ["https://dev-i5c831tc.us.auth0.com/*"]
+    to:
+    - operation:
+        methods: ["GET"]
+

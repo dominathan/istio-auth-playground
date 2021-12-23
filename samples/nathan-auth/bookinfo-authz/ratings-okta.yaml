@@ -1,0 +1,27 @@
+# Allow both the products reviews to get data (for the bookinfo page to work)
+# and for external users with verified tokens
+
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: "ratings-okta-viewer"
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: ratings
+  action: ALLOW
+  rules:
+  - from:
+    - source:
+        principals: ["cluster.local/ns/default/sa/bookinfo-reviews"]
+    to:
+    - operation:
+        methods: ["GET"]
+  - from:
+    - source:
+       requestPrincipals: ["https://dev-56789135.okta.com/oauth2/default/*"]
+    to:
+    - operation:
+        methods: ["GET"]
+
