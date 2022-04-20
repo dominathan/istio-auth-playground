@@ -8,5 +8,5 @@ spec:
     matchLabels:
       app: ratings
   jwtRules:
-  - issuer: "http://localhost:8080/auth/realms/naynaytest"
-    jwksUri: "https://3e22-99-35-226-217.ngrok.io/auth/realms/naynaytest/protocol/openid-connect/certs" #have to use ngrok on separate cluster
+  - issuer: "http://localhost:8080/auth/realms/devops-test-realm"
+    jwksUri: "https://0ef2-71-45-253-34.ngrok.io/auth/realms/devops-test-realm/protocol/openid-connect/certs" #have to use ngrok on separate cluster

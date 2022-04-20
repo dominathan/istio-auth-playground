@@ -1,3 +1,30 @@
+# Nay Start
+
+1. wipe DD k8
+1. istioctl install --set profile=demo -y
+1. kubectl label namespace default istio-injection=enabled
+1. kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
+1. kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
+1. istioctl analyze
+1. kubectl create ns legacy
+1. kubectl apply -f samples/sleep/sleep.yaml
+1. FROM SLEED POD: `curl http://ratings.default.svc.cluster.local:9080/ratings/100`
+1. kubectl apply -f ./samples/nathan-auth/mtls-policy.yaml
+1. FROM SLEED POD: `curl http://ratings.default.svc.cluster.local:9080/ratings/100` - no longer can https from bad legacy namespace
+1. `cd keycloak && dc up` -> http://localhost:8080/auth/admin/master/ -> admin/admin
+1. get token
+
+```sh
+curl -X POST http://localhost:8080/auth/realms/devops-test-realm/protocol/openid-connect/token --header 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode 'grant_type=client_credentials' \
+--data-urlencode 'client_secret=cT0uFyKgS9sur4OmpnujfR1gBIr3sjOc' \
+--data-urlencode 'client_id=devopdays-bham'
+```
+1. openid config = http://localhost:8080/auth/realms/devops-test-realm/.well-known/openid-configuration
+1. ngrok http 8080
+1. kubectl apply -f ./samples/nathan-auth/ratings-jwt-keycloak-authn.yaml
+1. kubectl apply -f ./samples/nathan-auth/bookinfo-authz/ratings-keycloak.yaml
+
 # Istio AuthN/AuthZ
 
 see ./samples/nathan-auth/ - For example if using auth0, apply in this order

@@ -4,7 +4,7 @@
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
-  name: "ratings-okta-viewer"
+  name: "ratings-keycloak-viewer"
   namespace: default
 spec:
   selector:
@@ -18,11 +18,13 @@ spec:
     to:
     - operation:
         methods: ["GET"]
-        routes: [/poop]
   - from:
     - source:
-       requestPrincipals: ["https://dev-2132729.okta.com/oauth2/aus3l2vo9tEJm5cZ35d7/*"]
+       requestPrincipals: ["http://localhost:8080/auth/realms/devops-test-realm/*"]
     to:
     - operation:
         methods: ["GET"]
-
+        paths: ["/healthz/*"]
+    when:
+    - key: request.auth.claims[clientId]
+      values: ["devopdays-bham"]
